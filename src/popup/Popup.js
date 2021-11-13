@@ -1,7 +1,12 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
 
-function App() {
+function Popup() {
+  const sendMessage = () => {
+    chrome.runtime.sendMessage({
+      value: "openPopup",
+    });
+  };
   return (
     <div className="App">
       <header className="App-header">
@@ -18,8 +23,9 @@ function App() {
           Learn React
         </a>
       </header>
+      <button onClick={sendMessage}>Open popup</button>
     </div>
   );
 }
 
-export default App;
+export default Popup;
