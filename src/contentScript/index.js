@@ -1,14 +1,30 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "@webcomponents/custom-elements";
-import App from "./ContentScript";
+import ContentScript from "./ContentScript";
+import { StylesProvider, jssPreset } from "@material-ui/styles";
+import { create } from "jss";
 
 class ReactExtensionContainer extends HTMLElement {
   connectedCallback() {
     const mountPoint = document.createElement("span");
     mountPoint.id = "reactExtensionPoint";
 
-    ReactDOM.render(<App />, mountPoint);
+    const reactRoot = this.attachShadow({ mode: "open" }).appendChild(
+      mountPoint
+    );
+
+    const jss = create({
+      ...jssPreset(),
+      insertionPoint: reactRoot,
+    });
+
+    ReactDOM.render(
+      <StylesProvider jss={jss}>
+        <ContentScript />
+      </StylesProvider>,
+      mountPoint
+    );
   }
 }
 
