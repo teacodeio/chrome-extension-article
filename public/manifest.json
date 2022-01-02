@@ -13,6 +13,9 @@
     "48": "logo192.png",
     "128": "logo192.png"
   },
+  "background": {
+    "scripts": ["static/js/background.js"]
+  },
   "content_scripts": [
     {
       "matches": ["<all_urls>"],

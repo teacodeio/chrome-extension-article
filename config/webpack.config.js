@@ -195,6 +195,7 @@ module.exports = function (webpackEnv) {
               // changing JS code would still trigger a refresh.
             ]
           : paths.appIndexJs,
+      background: paths.appBackgroundJs,
       content: paths.appContentJs,
     },
     output: {
@@ -567,6 +568,7 @@ module.exports = function (webpackEnv) {
           isEnvProduction
             ? {
                 excludeChunks: [
+                  'background',
                   'content', 
                 ],
                 minify: {

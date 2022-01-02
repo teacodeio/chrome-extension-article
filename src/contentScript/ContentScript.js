@@ -26,6 +26,8 @@ const useStyles = makeStyles({
 function ContentScript() {
   const { modal, overlay } = useStyles();
   const [open, setOpen] = useState(false);
+
+  const [message, setMessage] = useState(false);
   const sendMessage = () => {
     chrome.runtime.sendMessage({
       value: "hello from content script",
@@ -33,6 +35,7 @@ function ContentScript() {
   };
 
   chrome.runtime.onMessage.addListener((message) => {
+    setMessage(message.value);
     if (message.value === "openPopup") {
       setOpen(true);
     }
@@ -44,6 +47,7 @@ function ContentScript() {
     <Box className={overlay}>
       <Box className={modal}>
         <Typography>Popup</Typography>
+        <Typography>Message: {message}</Typography>
         <Button variant="contained" onClick={() => setOpen(false)}>
           Close
         </Button>
